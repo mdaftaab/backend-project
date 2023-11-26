@@ -28,11 +28,11 @@ const userSchema = new Schema(
         avatar: {
             type: String,
             required: true,
-            default: "/images/avatars/default.png"
+            // default: "/images/avatars/default.png"
         },
         coverImage: {
             type: String,
-            default: "/images/cover/default.png"
+            // default: "/images/cover/default.png"
         },
         watchHistory: [
             {
@@ -57,7 +57,7 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
     if (!this.isModified('password')) return next();
 
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
